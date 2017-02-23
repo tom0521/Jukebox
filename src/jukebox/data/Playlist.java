@@ -21,16 +21,9 @@ import java.util.ArrayList;
  */
 public class Playlist extends ArrayList<String> {
 
-    /**
-     * ArrayList holding the songs to be played next
-     */
     private ArrayList<String> _queue;
-
     private ArrayList<String> _shuffle;
 
-    /**
-     * Constructor initializes the instance variables
-     */
     public Playlist(){
         super();
         _queue = new ArrayList<>();
