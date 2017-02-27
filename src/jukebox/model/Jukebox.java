@@ -1,9 +1,9 @@
 package jukebox.model;
 
 import jukebox.data.Playlist;
+import jukebox.ui.UserInterface;
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by Thomas on 2/25/2017.
@@ -13,18 +13,17 @@ public class Jukebox {
     private final String[] EXT = {"mp3", "flac"};
 
     private Playlist playlist;
+    private UserInterface userInterface;
 
-    public Jukebox(String[] drives){
+    public Jukebox(UserInterface userInterface, String[] drives){
+        this.userInterface = userInterface;
+
         playlist = new Playlist();
-        try {
-            getMusic(drives);
-        }
-        catch (IOException ex){
-            System.out.println("drives not found");
-        }
+
+        getMusic(drives);
     }
 
-    public void getMusic(String[] drives) throws IOException{
+    public void getMusic(String[] drives) {
 
         for(String drive : drives){
             File dir = new File(drive);
