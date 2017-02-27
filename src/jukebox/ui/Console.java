@@ -10,7 +10,7 @@ public class Console implements UserInterface {
         new Console(args);
     }
 
-    Jukebox jukebox;
+    private Jukebox jukebox;
 
     public Console(String[] drives) {
         jukebox = new Jukebox(this, drives);
