@@ -10,7 +10,7 @@ import java.io.File;
  */
 public class Jukebox {
 
-    private final String[] EXT = {"mp3", "flac"};
+    private final String[] EXT = {"mp3", "flac", "m4a"};
 
     private Playlist playlist;
     private UserInterface userInterface;
@@ -33,14 +33,15 @@ public class Jukebox {
 
     private void searchDirectory(File dir){
         File[] files = dir.listFiles();
-
-        for(File file : files){
-            if(file.isDirectory())
-                searchDirectory(file);
-            else{
-                for(String ext : EXT)
-                    if(file.toString().endsWith(ext))
-                        playlist.add(file.toPath().toString());
+        if(files != null) {
+            for (File file : files) {
+                if (file.isDirectory())
+                    searchDirectory(file);
+                else {
+                    for (String ext : EXT)
+                        if (file.toString().endsWith(ext))
+                            playlist.add(file.toPath().toString());
+                }
             }
         }
     }
