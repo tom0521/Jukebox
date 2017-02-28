@@ -1,6 +1,7 @@
 package jukebox.model;
 
 import jukebox.data.Playlist;
+import jukebox.data.Song;
 import jukebox.ui.UserInterface;
 
 import java.io.File;
@@ -33,17 +34,15 @@ public class Jukebox {
 
     private void searchDirectory(File dir){
         File[] files = dir.listFiles();
-        if(files != null) {
-            for (File file : files) {
+
+        if(files != null)
+            for (File file : files)
                 if (file.isDirectory())
                     searchDirectory(file);
-                else {
+                else
                     for (String ext : EXT)
                         if (file.toString().endsWith(ext))
-                            playlist.add(file.toPath().toString());
-                }
-            }
-        }
+                            playlist.add(new Song(file));
     }
 
     public Playlist getPlaylist(){

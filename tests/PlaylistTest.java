@@ -13,7 +13,7 @@ public class PlaylistTest {
 
     private Playlist playlist;
 
-    @Before
+    /*@Before
     public void initializeTests(){
         playlist = new Playlist();
         playlist.add("Banana"); playlist.add("apple"); playlist.add("GraPE");
@@ -45,5 +45,5 @@ public class PlaylistTest {
         playlist.addToQueue(1);
 
         assertEquals("Banana", playlist.next());
-    }
+    }*/
 }

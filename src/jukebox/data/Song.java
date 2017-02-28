@@ -1,6 +1,9 @@
 package jukebox.data;
 
+import javafx.scene.media.Media;
+
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -8,46 +11,59 @@ import java.io.IOException;
  * the song object takes the pathname of the song and
  * gets and stores the information about it (i.e. Title, Album Art, etc.)
  *
- * ******* REWORK THE METADATA RETRIEVAL PROCESS ********
  *
  * @author Thomas Sherwood
  */
 public class Song {
 
-    private String _pathname, _title, _artist, _album,  _year, _track;
-    private Image _albumArt;
-    private long _length;
+    private Metadata metadata;
+    private Media media;
 
-    public Song(String pathname){
-        _pathname = pathname;
+    public Song(File file){
+        try {
+            metadata = new Metadata(file);
+            //media = new Media(file.toURI().toString());
+        }
+        catch (IOException ex){
+            System.out.println("Unsuccessful Tag Retrival");
+        }
+    }
+
+    public String toString(){
+        return getArtist() + " " + getTrack();
     }
 
     public Image getAlbumArt() {
-        return _albumArt;
+        return metadata.getAlbumArt();
     }
 
     public long getLength() {
-        return _length;
+        return metadata.getLength();
     }
 
     public String getAlbum() {
-        return _album;
+        return metadata.getAlbum();
     }
 
     public String getArtist() {
-        return _artist;
+        return metadata.getArtist();
     }
 
     public String getYear() {
-        return _year;
+        return metadata.getYear();
     }
 
     public String getTitle() {
-        return _title;
+        return metadata.getTitle();
     }
 
     public String getTrack() {
-        return _track;
+        return metadata.getTrack();
+    }
+
+    public Media getMedia(){
+        return media;
     }
 
 }
+

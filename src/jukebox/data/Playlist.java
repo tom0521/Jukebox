@@ -9,8 +9,6 @@ import java.util.ArrayList;
  *     shuffle is the shuffled list of songs
  *
  *   ****** POSSIBLE CHANGES ********
- *   1. Remove the shuffle array list
- *      - Add a random index(in this)
  *      - Do not remove from queue
  *      - When adding randomly, if(!queue.contains(randSong))
  *      - When queue.size() == this.size(), clear the queue
@@ -19,20 +17,27 @@ import java.util.ArrayList;
  *
  * @author Thomas Sherwood
  */
-public class Playlist extends ArrayList<String> {
+public class Playlist extends ArrayList<Song> {
 
-    private ArrayList<String> _queue;
+    private ArrayList<Song> queue;
 
     public Playlist(){
         super();
-        _queue = new ArrayList<>();
+        queue = new ArrayList<>();
     }
 
+    /**
+     *  TO DO: FIX THE SORTING TO IGNORE 'THE' AND GET TRACKS IN CORRECT ORDER
+     *
+     * @param s
+     * @return
+     */
+
     @Override
-    public boolean add(String s){
+    public boolean add(Song s){
         // Add new song to the song list in alphabetical order
         int i = 0;
-        while(i < size() && get(i).compareToIgnoreCase(s) < 0)
+        while(i < size() && get(i).toString().compareToIgnoreCase(s.toString()) < 0)
             i++;
         this.add(i, s);
 
@@ -44,17 +49,22 @@ public class Playlist extends ArrayList<String> {
         if(index < 0 || index > size())
             return false;
 
-        _queue.add(this.get(index));
+        queue.add(this.get(index));
         return true;
     }
 
-    public String next(){
-        _queue.remove(0);
-        return _queue.get(0);
+    /**
+     *  NEEDS TO BE RETURN THE NEXT LONG
+     *
+     * @return
+     */
+
+    public Song next(){
+        return queue.get(0);
     }
 
-    public ArrayList<String> getQueue(){
-        return _queue;
+    public ArrayList<Song> getQueue(){
+        return queue;
     }
 
 }

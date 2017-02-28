@@ -1,5 +1,6 @@
 package jukebox.ui;
 
+import jukebox.data.Song;
 import jukebox.model.Jukebox;
 
 /**
@@ -14,6 +15,9 @@ public class Console implements UserInterface {
 
     public Console(String[] drives) {
         jukebox = new Jukebox(this, drives);
+        for (Song s : jukebox.getPlaylist()){
+            System.out.println(s.toString() + ": " + s.getAlbumArt());
+        }
     }
 
     @Override
