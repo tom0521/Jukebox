@@ -16,12 +16,14 @@ public class Console implements UserInterface {
     public Console(String[] drives) {
         jukebox = new Jukebox(this, drives);
         for (Song s : jukebox.getPlaylist()){
-            System.out.println(s.toString() + ": " + s.getAlbumArt());
+            System.out.println(s.getTrack() + " " + s.getTitle() + " by " + s.getArtist()+ " on " + s.getAlbum());
         }
     }
 
     @Override
     public void update() {
-
+        for (Song s : jukebox.getPlaylist()){
+            System.out.println(s.getTrack() + " " + s.getTitle() + " by " + s.getArtist()+ " on " + s.getAlbum());
+        }
     }
 }

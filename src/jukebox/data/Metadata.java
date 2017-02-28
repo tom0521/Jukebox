@@ -49,8 +49,8 @@ public class Metadata {
         return tag.getFirst(FieldKey.YEAR);
     }
 
-    public String getTrack(){
-        return tag.getFirst(FieldKey.TRACK);
+    public int getTrack(){
+        return Integer.parseInt(tag.getFirst(FieldKey.TRACK));
     }
 
     public Image getAlbumArt() {

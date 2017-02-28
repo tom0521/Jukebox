@@ -27,17 +27,17 @@ public class Playlist extends ArrayList<Song> {
     }
 
     /**
-     *  TO DO: FIX THE SORTING TO IGNORE 'THE' AND GET TRACKS IN CORRECT ORDER
+     *  TO DO: FIX THE SORTING TO IGNORE 'THE'
      *
-     * @param s
-     * @return
      */
 
     @Override
     public boolean add(Song s){
-        // Add new song to the song list in alphabetical order
+        // Add new song to the song list in order by artist then album then track in that order
         int i = 0;
-        while(i < size() && get(i).toString().compareToIgnoreCase(s.toString()) < 0)
+        while(i < size() && (get(i).getArtist().compareToIgnoreCase(s.getArtist()) < 0 ||
+                (get(i).getArtist().compareToIgnoreCase(s.getArtist()) == 0 && get(i).getAlbum().compareToIgnoreCase(s.getAlbum()) < 0) ||
+                (get(i).getAlbum().compareToIgnoreCase(s.getAlbum()) == 0 && get(i).getTrack() < s.getTrack())))
             i++;
         this.add(i, s);
 
@@ -53,13 +53,7 @@ public class Playlist extends ArrayList<Song> {
         return true;
     }
 
-    /**
-     *  NEEDS TO BE RETURN THE NEXT LONG
-     *
-     * @return
-     */
-
-    public Song next(){
+    public Song next(boolean shuffleSelected){
         return queue.get(0);
     }
 

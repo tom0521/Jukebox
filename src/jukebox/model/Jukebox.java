@@ -16,19 +16,18 @@ public class Jukebox {
     private Playlist playlist;
     private UserInterface userInterface;
 
-    public Jukebox(UserInterface userInterface, String[] drives){
+    public Jukebox(UserInterface userInterface, String[] directories){
         this.userInterface = userInterface;
 
         playlist = new Playlist();
 
-        getMusic(drives);
+        getMusic(directories);
     }
 
-    public void getMusic(String[] drives) {
+    public void getMusic(String[] directories) {
 
-        for(String drive : drives){
-            File dir = new File(drive);
-            searchDirectory(dir);
+        for(String dir : directories){
+            searchDirectory(new File(dir));
         }
     }
 
