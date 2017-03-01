@@ -11,7 +11,7 @@ import java.io.File;
  */
 public class Jukebox {
 
-    private final String[] EXT = {"mp3", "flac", "m4a"};
+    private final String[] EXT = {"mp3", "m4a"};
 
     private Playlist playlist;
     private UserInterface userInterface;

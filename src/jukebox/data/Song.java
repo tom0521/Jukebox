@@ -1,5 +1,7 @@
 package jukebox.data;
 
+import javafx.scene.media.Media;
+
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -15,11 +17,12 @@ import java.io.IOException;
 public class Song {
 
     private Metadata metadata;
+    private Media media;
 
     public Song(File file){
         try {
             metadata = new Metadata(file);
-
+            media = new Media(file.toURI().toString());
         }
         catch (IOException ex){
             System.out.println("Unsuccessful Tag Retrival");
@@ -52,6 +55,10 @@ public class Song {
 
     public int getTrack() {
         return metadata.getTrack();
+    }
+
+    public Media getMedia(){
+        return media;
     }
 
 }
