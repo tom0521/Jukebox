@@ -29,21 +29,6 @@ public class Jukebox {
         setlist = new Setlist();
 
         getMusic(directories);
-
-        mediaPlayer = new MediaPlayer(playlist.get(0).getMedia());
-
-        mediaPlayer.setOnReady(new Runnable() {
-            @Override
-            public void run() {
-                if(setlist.getCurrentSong() != null) {
-                    mediaPlayer = new MediaPlayer(setlist.getCurrentSong().getMedia());
-                    mediaPlayer.play();
-                    userInterface.update();
-                }
-            }
-        });
-
-        setlist.add(playlist.get(0));
     }
 
     public void getMusic(String[] directories) {
@@ -66,6 +51,13 @@ public class Jukebox {
                             playlist.add(new Song(file));
     }
 
+    public void update(){
+        if(shuffle && (mediaPlayer == null || mediaPlayer.getStatus() == MediaPlayer.Status.DISPOSED)) {
+            setlist.add(playlist.get((int) (Math.random() * (playlist.size() - 1))));
+            initMediaPlayer(setlist.next().getMedia());
+        }
+    }
+
     public Playlist getPlaylist(){
         return playlist;
     }
@@ -76,5 +68,30 @@ public class Jukebox {
 
     public void changeShuffle(){
         shuffle = !shuffle;
+        update();
+    }
+
+    private void initMediaPlayer(Media media){
+        mediaPlayer = new MediaPlayer(media);
+
+        mediaPlayer.setOnReady(new Runnable() {
+            @Override
+            public void run() {
+                mediaPlayer.play();
+                userInterface.update();
+            }
+        });
+
+        mediaPlayer.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                mediaPlayer.dispose();
+                if(setlist.hasNext()){
+                    initMediaPlayer(setlist.next().getMedia());
+                }
+                else
+                    update();
+            }
+        });
     }
 }

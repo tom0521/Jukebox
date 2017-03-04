@@ -17,7 +17,6 @@ public class Setlist extends ArrayList<Song> {
     /**
      * If the setlist contains the song at a value less than currentSong,
      * the method removes the song to re-add it at the end of the list and returns true
-     * If the setlist was empty then the current song is updated
      * If it is already in the list but after currentSong the method returns false
      *
      * @param s is a song to be added
@@ -31,13 +30,14 @@ public class Setlist extends ArrayList<Song> {
                 currentSong--;
             }
 
-            if(isEmpty())
-                currentSong++;
-
             return super.add(s);
         }
 
         return false;
+    }
+
+    public boolean hasNext(){
+        return !(currentSong == size() - 1);
     }
 
     /**
@@ -46,7 +46,7 @@ public class Setlist extends ArrayList<Song> {
      * @return next song or null
      */
     public Song next(){
-        if(currentSong < size()) {
+        if(currentSong < size() - 1) {
             currentSong++;
             return get(currentSong);
         }

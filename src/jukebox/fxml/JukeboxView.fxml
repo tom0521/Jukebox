@@ -15,7 +15,7 @@
          <bottom>
             <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="shuffleButton" mnemonicParsing="false" onAction="#shuffleChanged" text="Button" />
+                  <Button fx:id="shuffleButton" mnemonicParsing="false" onAction="#shuffleChanged" text="Shuffle" />
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Label fx:id="titleLabel" textFill="WHITE" />
