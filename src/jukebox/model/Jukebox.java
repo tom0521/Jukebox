@@ -1,5 +1,7 @@
 package jukebox.model;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import jukebox.data.Playlist;
 import jukebox.data.Setlist;
 import jukebox.data.Song;
@@ -12,20 +14,36 @@ import java.io.File;
  */
 public class Jukebox {
 
-    private final String[] EXT = {"mp3", "m4a"};
+    private final String[] EXTENSIONS = {"mp3", "m4a"};
 
+    private MediaPlayer mediaPlayer;
     private Playlist playlist;
     private Setlist setlist;
     private UserInterface userInterface;
     private boolean shuffle;
 
-    public Jukebox(UserInterface userInterface, String[] directories){
-        this.userInterface = userInterface;
+    public Jukebox(UserInterface ui, String[] directories){
+        userInterface = ui;
 
         playlist = new Playlist();
         setlist = new Setlist();
 
         getMusic(directories);
+
+        mediaPlayer = new MediaPlayer(playlist.get(0).getMedia());
+
+        mediaPlayer.setOnReady(new Runnable() {
+            @Override
+            public void run() {
+                if(setlist.getCurrentSong() != null) {
+                    mediaPlayer = new MediaPlayer(setlist.getCurrentSong().getMedia());
+                    mediaPlayer.play();
+                    userInterface.update();
+                }
+            }
+        });
+
+        setlist.add(playlist.get(0));
     }
 
     public void getMusic(String[] directories) {
@@ -43,7 +61,7 @@ public class Jukebox {
                 if (file.isDirectory())
                     searchDirectory(file);
                 else
-                    for (String ext : EXT)
+                    for (String ext : EXTENSIONS)
                         if (file.toString().endsWith(ext))
                             playlist.add(new Song(file));
     }

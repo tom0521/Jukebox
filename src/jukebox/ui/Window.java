@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import sun.applet.Main;
 
@@ -34,6 +35,7 @@ public class Window extends Application {
             Parent root = FXMLLoader.load(getClass().getResource("/jukebox/fxml/JukeboxView.fxml"));
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
+            primaryStage.getIcons().add(new Image("record-icon.png"));
         }
         catch(Exception ex){
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
