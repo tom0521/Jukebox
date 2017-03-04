@@ -56,6 +56,7 @@ public class Jukebox {
             setlist.add(playlist.get((int) (Math.random() * (playlist.size() - 1))));
             initMediaPlayer(setlist.next().getMedia());
         }
+        userInterface.update();
     }
 
     public Playlist getPlaylist(){
@@ -78,7 +79,6 @@ public class Jukebox {
             @Override
             public void run() {
                 mediaPlayer.play();
-                userInterface.update();
             }
         });
 
@@ -86,8 +86,8 @@ public class Jukebox {
             @Override
             public void run() {
                 mediaPlayer.dispose();
-                if(setlist.hasNext()){
-                    initMediaPlayer(setlist.next().getMedia());
+                if(setlist.next() != null){
+                    initMediaPlayer(setlist.getCurrentSong().getMedia());
                 }
                 else
                     update();

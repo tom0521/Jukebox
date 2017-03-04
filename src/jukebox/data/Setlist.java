@@ -36,22 +36,15 @@ public class Setlist extends ArrayList<Song> {
         return false;
     }
 
-    public boolean hasNext(){
-        return !(currentSong == size() - 1);
-    }
-
     /**
      * If there is a next song in the setlist this method increments the currentSong and return the song
      * else it returns null
      * @return next song or null
      */
     public Song next(){
-        if(currentSong < size() - 1) {
-            currentSong++;
-            return get(currentSong);
-        }
+        currentSong++;
 
-        return null;
+        return getCurrentSong();
     }
 
     public Song getCurrentSong(){
