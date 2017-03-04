@@ -1,6 +1,7 @@
 package jukebox.model;
 
 import jukebox.data.Playlist;
+import jukebox.data.Setlist;
 import jukebox.data.Song;
 import jukebox.ui.UserInterface;
 
@@ -14,12 +15,15 @@ public class Jukebox {
     private final String[] EXT = {"mp3", "m4a"};
 
     private Playlist playlist;
+    private Setlist setlist;
     private UserInterface userInterface;
+    private boolean shuffle;
 
     public Jukebox(UserInterface userInterface, String[] directories){
         this.userInterface = userInterface;
 
         playlist = new Playlist();
+        setlist = new Setlist();
 
         getMusic(directories);
     }
@@ -46,5 +50,13 @@ public class Jukebox {
 
     public Playlist getPlaylist(){
         return playlist;
+    }
+
+    public Setlist getSetlist(){
+        return setlist;
+    }
+
+    public void changeShuffle(){
+        shuffle = !shuffle;
     }
 }

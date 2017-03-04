@@ -1,8 +1,8 @@
 package jukebox.data;
 
+import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 

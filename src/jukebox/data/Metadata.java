@@ -1,12 +1,13 @@
 package jukebox.data;
 
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -16,12 +17,13 @@ import java.io.IOException;
  */
 public class Metadata {
 
-    private AudioFile audioFile;
+    private long length;
     private Tag tag;
 
     public Metadata(File file) throws IOException{
         try {
-            audioFile = AudioFileIO.read(file);
+            AudioFile audioFile = AudioFileIO.read(file);
+            length = audioFile.getAudioHeader().getTrackLength();
             tag = audioFile.getTag();
         }
         catch (Exception ex){
@@ -30,7 +32,7 @@ public class Metadata {
     }
 
     public long getLength(){
-        return audioFile.getAudioHeader().getTrackLength();
+        return length;
     }
 
     public String getTitle(){
@@ -58,7 +60,7 @@ public class Metadata {
             byte[] data = tag.getFirstArtwork().getBinaryData();
 
             try {
-                return ImageIO.read(new ByteArrayInputStream(data));
+                return SwingFXUtils.toFXImage(ImageIO.read(new ByteArrayInputStream(data)), null);
             } catch (IOException e) {
             }
 

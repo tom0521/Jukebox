@@ -5,8 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sun.applet.Main;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by Thomas on 2/28/2017.
@@ -33,7 +36,7 @@ public class Window extends Application {
             primaryStage.show();
         }
         catch(Exception ex){
-            System.out.println("'JukeboxView.fxml' not found");
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

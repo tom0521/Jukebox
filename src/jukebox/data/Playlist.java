@@ -19,11 +19,8 @@ import java.util.ArrayList;
  */
 public class Playlist extends ArrayList<Song> {
 
-    private ArrayList<Song> queue;
-
     public Playlist(){
         super();
-        queue = new ArrayList<>();
     }
 
     /**
@@ -42,23 +39,6 @@ public class Playlist extends ArrayList<Song> {
         this.add(i, s);
 
         return true;
-    }
-
-    public boolean addToQueue(int index) {
-
-        if(index < 0 || index > size())
-            return false;
-
-        queue.add(this.get(index));
-        return true;
-    }
-
-    public Song next(boolean shuffleSelected){
-        return queue.get(0);
-    }
-
-    public ArrayList<Song> getQueue(){
-        return queue;
     }
 
 }
