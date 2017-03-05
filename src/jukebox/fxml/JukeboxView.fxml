@@ -19,14 +19,17 @@
                      <HBox.margin>
                         <Insets />
                      </HBox.margin></CheckBox>
-                  <VBox>
+                  <VBox alignment="CENTER" spacing="5.0">
                      <children>
-                        <Label fx:id="titleLabel" textFill="WHITE" />
-                        <Label fx:id="artistLabel" textFill="WHITE" />
-                        <Label fx:id="albumLabel" textFill="WHITE" />
+                        <Label fx:id="titleLabel" alignment="CENTER" contentDisplay="CENTER" textFill="WHITE" />
+                        <Label fx:id="artistLabel" alignment="CENTER" contentDisplay="CENTER" textFill="WHITE" />
+                        <Label fx:id="albumLabel" alignment="CENTER" textFill="WHITE" />
                      </children>
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
                   </VBox>
-                  <Slider fx:id="volumeSlider" onDragDetected="#volumeChanged" />
+                  <Slider fx:id="volumeSlider" value="75.0" />
                </children>
                <BorderPane.margin>
                   <Insets />

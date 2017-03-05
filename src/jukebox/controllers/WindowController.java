@@ -8,6 +8,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import jukebox.data.Song;
+import jukebox.listeners.VolumeListener;
 import jukebox.model.Jukebox;
 import jukebox.ui.UserInterface;
 import jukebox.ui.Window;
@@ -30,6 +31,8 @@ public class WindowController implements Initializable, UserInterface{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         jukebox = new Jukebox(this, Window.directories);
+
+        volumeSlider.valueProperty().addListener(new VolumeListener(jukebox));
     }
 
     @Override
@@ -59,8 +62,4 @@ public class WindowController implements Initializable, UserInterface{
         jukebox.setShuffle(shuffleButton.isSelected());
     }
 
-    @FXML
-    public void volumeChanged(){
-        System.out.println(volumeSlider.getValue());
-    }
 }

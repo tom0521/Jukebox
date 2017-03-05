@@ -20,6 +20,7 @@ public class Jukebox {
     private Playlist playlist;
     private Setlist setlist;
     private UserInterface userInterface;
+    private double volume;
     private boolean shuffle;
 
     public Jukebox(UserInterface ui, String[] directories){
@@ -29,6 +30,8 @@ public class Jukebox {
         setlist = new Setlist();
 
         getMusic(directories);
+
+        volume = 0.75;
     }
 
     public void getMusic(String[] directories) {
@@ -80,6 +83,7 @@ public class Jukebox {
 
     private void initMediaPlayer(Media media){
         mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setVolume(volume);
 
         mediaPlayer.setOnReady(new Runnable() {
             @Override
@@ -102,5 +106,12 @@ public class Jukebox {
             return null;
 
         return setlist.getCurrentSong();
+    }
+
+    public void setVolume(double value){
+        if(mediaPlayer != null) {
+            mediaPlayer.setVolume(value);
+            volume = value;
+        }
     }
 }
