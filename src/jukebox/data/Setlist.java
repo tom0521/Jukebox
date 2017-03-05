@@ -24,34 +24,33 @@ public class Setlist extends ArrayList<Song> {
      */
     @Override
     public boolean add(Song s){
-        if(indexOf(s) <= currentSong){
-            if(contains(s)) {
-                remove(s);
-                currentSong--;
-            }
-
-            return super.add(s);
+        if(contains(s)){
+            remove(s);
+            currentSong--;
         }
-
-        return false;
+        return super.add(s);
     }
 
     /**
-     * If there is a next song in the setlist this method increments the currentSong and return the song
-     * else it returns null
-     * @return next song or null
+     * Increments current song and return the song
+     * @return true if currentSong was incremented false if it is already equal to size
      */
-    public Song next(){
-        currentSong++;
+    public void nextSong(){
+        if(hasNextSong())
+            currentSong++;
+    }
 
-        return getCurrentSong();
+    public boolean hasNextSong(){
+        return currentSong + 1 < size();
     }
 
     public Song getCurrentSong(){
-        if(currentSong < 0 || currentSong >= size())
+        try {
+            return get(currentSong);
+        }
+        catch (IndexOutOfBoundsException ex){
             return null;
-
-        return get(currentSong);
+        }
     }
 
 }

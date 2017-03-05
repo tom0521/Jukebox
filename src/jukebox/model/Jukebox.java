@@ -52,9 +52,15 @@ public class Jukebox {
     }
 
     public void update(){
-        if(shuffle && (mediaPlayer == null || mediaPlayer.getStatus() == MediaPlayer.Status.DISPOSED)) {
-            setlist.add(playlist.get((int) (Math.random() * (playlist.size() - 1))));
-            initMediaPlayer(setlist.next().getMedia());
+        if( mediaPlayer == null || mediaPlayer.getStatus() == MediaPlayer.Status.DISPOSED) {
+            if (setlist.hasNextSong()) {
+                setlist.nextSong();
+                initMediaPlayer(setlist.getCurrentSong().getMedia());
+            } else if (shuffle) {
+                setlist.add(playlist.get((int) (Math.random() * (playlist.size() - 1))));
+                setlist.nextSong();
+                initMediaPlayer(setlist.getCurrentSong().getMedia());
+            }
         }
         userInterface.update();
     }
@@ -67,8 +73,8 @@ public class Jukebox {
         return setlist;
     }
 
-    public void changeShuffle(){
-        shuffle = !shuffle;
+    public void setShuffle(boolean shuffle){
+        this.shuffle = shuffle;
         update();
     }
 
@@ -86,11 +92,7 @@ public class Jukebox {
             @Override
             public void run() {
                 mediaPlayer.dispose();
-                if(setlist.next() != null){
-                    initMediaPlayer(setlist.getCurrentSong().getMedia());
-                }
-                else
-                    update();
+                update();
             }
         });
     }

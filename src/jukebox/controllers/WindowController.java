@@ -2,7 +2,7 @@ package jukebox.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 public class WindowController implements Initializable, UserInterface{
 
     @FXML private ImageView albumArt;
-    @FXML private Button shuffleButton;
+    @FXML private CheckBox shuffleButton;
     @FXML private Label titleLabel, artistLabel, albumLabel;
     @FXML private Slider volumeSlider;
 
@@ -30,7 +30,6 @@ public class WindowController implements Initializable, UserInterface{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         jukebox = new Jukebox(this, Window.directories);
-        update();
     }
 
     @Override
@@ -57,7 +56,7 @@ public class WindowController implements Initializable, UserInterface{
 
     @FXML
     public void shuffleChanged(){
-        jukebox.changeShuffle();
+        jukebox.setShuffle(shuffleButton.isSelected());
     }
 
     @FXML
