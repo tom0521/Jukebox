@@ -96,4 +96,11 @@ public class Jukebox {
             }
         });
     }
+
+    public Song getPlayingSong(){
+        if(mediaPlayer == null || mediaPlayer.getStatus() == MediaPlayer.Status.DISPOSED)
+            return null;
+
+        return setlist.getCurrentSong();
+    }
 }

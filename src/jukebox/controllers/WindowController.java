@@ -34,7 +34,7 @@ public class WindowController implements Initializable, UserInterface{
 
     @Override
     public void update() {
-        Song song = jukebox.getSetlist().getCurrentSong();
+        Song song = jukebox.getPlayingSong();
 
         if(song == null){
             albumArt.setImage(null);
