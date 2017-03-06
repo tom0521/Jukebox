@@ -7,11 +7,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import jukebox.data.Song;
+import jukebox.listeners.Visualizer;
 import jukebox.listeners.VolumeListener;
 import jukebox.model.Jukebox;
 import jukebox.ui.UserInterface;
 import jukebox.ui.Window;
+import jukebox.visualizers.BarVisualizer;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,6 +25,7 @@ import java.util.ResourceBundle;
  */
 public class WindowController implements Initializable, UserInterface{
 
+    @FXML private StackPane stackPane;
     @FXML private ImageView albumArt;
     @FXML private CheckBox shuffleButton;
     @FXML private Label titleLabel, artistLabel, albumLabel;
@@ -30,8 +35,9 @@ public class WindowController implements Initializable, UserInterface{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        jukebox = new Jukebox(this, Window.directories);
-
+        Visualizer visualizer = new BarVisualizer();
+        stackPane.getChildren().add(0, visualizer);
+        jukebox = new Jukebox(this, visualizer, Window.directories);
         volumeSlider.valueProperty().addListener(new VolumeListener(jukebox));
     }
 

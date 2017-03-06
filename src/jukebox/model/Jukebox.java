@@ -1,10 +1,12 @@
 package jukebox.model;
 
+import javafx.scene.media.AudioSpectrumListener;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import jukebox.data.Playlist;
 import jukebox.data.Setlist;
 import jukebox.data.Song;
+import jukebox.listeners.Visualizer;
 import jukebox.ui.UserInterface;
 
 import java.io.File;
@@ -17,14 +19,16 @@ public class Jukebox {
     private final String[] EXTENSIONS = {"mp3", "m4a"};
 
     private MediaPlayer mediaPlayer;
+    private AudioSpectrumListener visualizer;
     private Playlist playlist;
     private Setlist setlist;
     private UserInterface userInterface;
     private double volume;
     private boolean shuffle;
 
-    public Jukebox(UserInterface ui, String[] directories){
-        userInterface = ui;
+    public Jukebox(UserInterface userInterface, AudioSpectrumListener visualizer, String[] directories){
+        this.userInterface = userInterface;
+        this.visualizer = visualizer;
 
         playlist = new Playlist();
         setlist = new Setlist();
@@ -84,6 +88,7 @@ public class Jukebox {
     private void initMediaPlayer(Media media){
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setVolume(volume);
+        mediaPlayer.setAudioSpectrumListener(visualizer);
 
         mediaPlayer.setOnReady(new Runnable() {
             @Override
