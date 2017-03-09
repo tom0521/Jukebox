@@ -4,7 +4,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import jukebox.data.Song;
-import jukebox.model.Jukebox;
+import jukebox.data.Jukebox;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -31,7 +31,12 @@ public class Server {
         @Override
         public void handle(HttpExchange httpExchange) throws IOException {
             Song song = jukebox.getPlayingSong();
-            String response = "Now Playing:\n" + song.getTitle() + "\nby " + song.getArtist();
+            String title = "", artist = "";
+            if(song != null){
+                title = song.getTitle();
+                artist = "\nby " + song.getArtist();
+            }
+            String response = "Now Playing:\n" + title + artist;
             httpExchange.sendResponseHeaders(200, response.getBytes().length);
             OutputStream os = httpExchange.getResponseBody();
             os.write(response.getBytes());
