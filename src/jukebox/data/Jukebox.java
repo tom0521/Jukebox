@@ -3,16 +3,9 @@ package jukebox.data;
 import javafx.scene.media.AudioSpectrumListener;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import jukebox.data.Playlist;
-import jukebox.data.Setlist;
-import jukebox.data.Song;
-import jukebox.listeners.Visualizer;
-import jukebox.server.Server;
 import jukebox.ui.UserInterface;
 
 import java.io.File;
-import java.io.IOException;
-
 /**
  * Created by Thomas on 2/25/2017.
  */
@@ -38,12 +31,12 @@ public class Jukebox {
         getMusic(directories);
         volume = 0.75;
 
-        try{
+        /*try{
             Server server = new Server(this);
         }
         catch (IOException ex){
             System.out.println("Could not run server");
-        }
+        }*/
     }
 
     public void getMusic(String[] directories) {
