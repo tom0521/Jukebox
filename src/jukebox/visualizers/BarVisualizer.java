@@ -14,8 +14,8 @@ public class BarVisualizer extends Visualizer{
     @Override
     public void update(float[] magnitudes) {
         getChildren().clear();
-        double barWidth = (getWidth()/2.0)/(magnitudes.length/2.0);
-        for(int i = 0; i < magnitudes.length/2.0; i++){
+        double barWidth = (getWidth()/2.0)/(magnitudes.length/4);
+        for(int i = 0; i < magnitudes.length/4; i++){
             Rectangle bar1 = new Rectangle((getWidth()/2) - (barWidth * (i+1)), (getHeight()/2) - ((60 + magnitudes[i]) * SCALAR), barWidth, ((60 + magnitudes[i])) * SCALAR);
             bar1.setFill(Paint.valueOf("red"));
             getChildren().add(bar1);

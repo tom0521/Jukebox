@@ -7,9 +7,11 @@ import jukebox.data.Playlist;
 import jukebox.data.Setlist;
 import jukebox.data.Song;
 import jukebox.listeners.Visualizer;
+import jukebox.server.Server;
 import jukebox.ui.UserInterface;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by Thomas on 2/25/2017.
@@ -34,8 +36,14 @@ public class Jukebox {
         setlist = new Setlist();
 
         getMusic(directories);
-
         volume = 0.75;
+
+        try{
+            Server server = new Server(this);
+        }
+        catch (IOException ex){
+            System.out.println("Could not run server");
+        }
     }
 
     public void getMusic(String[] directories) {
