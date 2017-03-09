@@ -1,4 +1,4 @@
-package jukebox.model;
+package jukebox.data;
 
 import javafx.scene.media.AudioSpectrumListener;
 import javafx.scene.media.Media;

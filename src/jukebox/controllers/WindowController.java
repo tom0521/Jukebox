@@ -1,5 +1,7 @@
 package jukebox.controllers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
@@ -7,12 +9,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import jukebox.data.Song;
 import jukebox.listeners.Visualizer;
-import jukebox.listeners.VolumeListener;
-import jukebox.model.Jukebox;
+import jukebox.data.Jukebox;
 import jukebox.ui.UserInterface;
 import jukebox.ui.Window;
 import jukebox.visualizers.BarVisualizer;
@@ -38,7 +38,7 @@ public class WindowController implements Initializable, UserInterface{
         Visualizer visualizer = new BarVisualizer();
         stackPane.getChildren().add(0, visualizer);
         jukebox = new Jukebox(this, visualizer, Window.directories);
-        volumeSlider.valueProperty().addListener(new VolumeListener(jukebox));
+        volumeSlider.valueProperty().addListener(new VolumeListener());
     }
 
     @Override
@@ -68,4 +68,10 @@ public class WindowController implements Initializable, UserInterface{
         jukebox.setShuffle(shuffleButton.isSelected());
     }
 
+    private class VolumeListener implements ChangeListener {
+        @Override
+        public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+            jukebox.setVolume(Double.parseDouble(newValue.toString())/100);
+        }
+    }
 }
